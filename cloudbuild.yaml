@@ -1,0 +1,30 @@
+steps:
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args: ['cp', 'logs/metrics.jsonl', 'gs://your-bucket-name/ml_metrics/metrics.jsonl']
+
+  - name: 'gcr.io/cloud-builders/bq'
+    args:
+      - 'mk'
+      - '--dataset'
+      - 'crowe_ml_pipeline'
+    id: 'create-dataset'
+    waitFor: ['-']
+
+  - name: 'gcr.io/cloud-builders/bq'
+    args:
+      - 'mk'
+      - '--table'
+      - 'crowe_ml_pipeline.metrics_log'
+      - 'dataset:STRING,n_train:INTEGER,n_test:INTEGER,rmse:FLOAT,r2:FLOAT,timestamp:TIMESTAMP'
+    id: 'create-table-if-needed'
+    waitFor: ['create-dataset']
+
+  - name: 'gcr.io/cloud-builders/bq'
+    args:
+      - 'load'
+      - '--source_format=NEWLINE_DELIMITED_JSON'
+      - 'crowe_ml_pipeline.metrics_log'
+      - 'gs://your-bucket-name/ml_metrics/metrics.jsonl'
+    waitFor: ['create-table-if-needed']
+
+timeout: 300s
