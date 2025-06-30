@@ -1,0 +1,4 @@
+crowechem
+google-cloud-storage
+google-cloud-bigquery
+pydantic
