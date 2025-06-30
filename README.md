@@ -30,9 +30,9 @@ Push to GitHub and connect Cloud Build with a trigger using `cloudbuild.yaml`.
 Run the dataset builder to assemble training data:
 
 ```bash
-python build_dataset.py
+python build_dataset.py --output-dir data --output-file crowechem_dataset.jsonl
 ```
 
-The script creates `data/crowechem_dataset.jsonl` that can be consumed by your
-training jobs.
+Both arguments are optional. Without them the script creates
+`data/crowechem_dataset.jsonl`, which can be consumed by your training jobs.
 
