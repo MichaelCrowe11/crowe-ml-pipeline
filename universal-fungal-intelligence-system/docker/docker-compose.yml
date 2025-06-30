@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  fungal-intelligence:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ../src:/app/src
+      - ../data:/app/data
+    ports:
+      - "5000:5000"
+    environment:
+      - ENV=development
+      - DATABASE_URL=sqlite:///app/database.db
+    depends_on:
+      - db
+
+  db:
+    image: sqlite:latest
+    volumes:
+      - db_data:/data
+
+volumes:
+  db_data:

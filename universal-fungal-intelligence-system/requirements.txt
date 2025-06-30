@@ -1,0 +1,13 @@
+# Required Python packages for the Universal Fungal Intelligence System
+
+numpy
+pandas
+rdkit
+scikit-learn
+torch
+biopython
+aiohttp
+requests
+logging
+pytest
+```

@@ -1,0 +1,9 @@
+DATABASE_URL = "sqlite:///development.db"
+DEBUG = True
+LOG_LEVEL = "DEBUG"
+API_VERSION = "v1"
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+CORS_ORIGINS = ["http://localhost:3000"]
+SECRET_KEY = "your_secret_key_here"
+MIGRATION_DIR = "src/database/migrations"
+SEED_DIR = "src/database/seeds"

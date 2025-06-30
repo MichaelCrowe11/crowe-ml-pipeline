@@ -1,0 +1,1 @@
+# This file marks the collectors directory as a Python package.
