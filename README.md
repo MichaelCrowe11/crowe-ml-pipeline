@@ -2,6 +2,13 @@
 
 This repo automates the process of training cultivation models, exporting yield metrics, and uploading them into BigQuery for analysis.
 
+## Setup
+
+Install the required Python packages:
+```bash
+pip install -r requirements.txt
+```
+
 ## Contents
 
 - `upload_metrics_to_bigquery.sh`: Shell script to upload training metrics to GCS and BigQuery.
