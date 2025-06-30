@@ -13,7 +13,7 @@ pip install -r requirements.txt
 
 - `upload_metrics_to_bigquery.sh`: Shell script to upload training metrics to GCS and BigQuery.
 - `cloudbuild.yaml`: GCP Cloud Build pipeline for CI/CD integration.
-- `.github/workflows/validate.yaml`: GitHub Actions job to check formatting and syntax.
+- `.github/workflows/validate.yaml`: GitHub Actions workflow that runs Black and Flake8 to enforce formatting.
 - `README.md`: This file.
 - `build_dataset.py`: Utility to assemble the CroweChem dataset.
 

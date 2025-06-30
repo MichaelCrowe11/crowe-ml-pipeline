@@ -5,17 +5,19 @@ import argparse
 try:
     from crowechem.core.data_sources import get_dataset
 except ImportError:  # Fallback if CroweChem isn't installed
+
     def get_dataset():
-        return [
-            {"id": 1, "molecule": "example", "property": 0.0}
-        ]
+        return [{"id": 1, "molecule": "example", "property": 0.0}]
+
 
 try:
     from crowechem.core.validation import validate_dataset
 except ImportError:
+
     def validate_dataset(data):
         if not isinstance(data, list):
             raise ValueError("Dataset must be a list")
+
 
 OUTPUT_DIR = "data"
 OUTPUT_FILE = "crowechem_dataset.jsonl"
