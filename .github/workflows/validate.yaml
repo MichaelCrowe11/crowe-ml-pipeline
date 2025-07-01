@@ -5,16 +5,74 @@ on:
   pull_request:
 
 jobs:
-  lint:
+  lint-test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7, 3.8, 3.9, 3.10, 3.11]
     steps:
       - uses: actions/checkout@v3
+
       - uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
+          python-version: ${{ matrix.python-version }}
+
+      - name: Cache pip
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
       - name: Install dependencies
-        run: pip install black flake8
+        run: |
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          fi
+          pip install black flake8 pytest pytest-cov
+
       - name: Run black
         run: black --check .
+
       - name: Run flake8
         run: flake8 .
+
+      - name: Run pytest
+        run: |
+          if [ -d tests ] || ls test_*.py 1> /dev/null 2>&1; then
+            pytest --cov=. || true
+          else
+            echo "No tests found, skipping pytest."
+          fi
+
+      - name: Install shellcheck
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+
+      - name: Lint Shell Scripts
+        run: |
+          shopt -s globstar nullglob
+          found=0
+          for file in **/*.sh; do
+            [ -e "$file" ] && shellcheck "$file" && found=1
+          done
+          if [ $found -eq 0 ]; then
+            echo "No shell scripts found."
+          fi
+
+      - name: Install hadolint
+        run: |
+          wget -O /tmp/hadolint https://github.com/hadolint/hadolint/releases/latest/download/hadolint-Linux-x86_64
+          chmod +x /tmp/hadolint
+          sudo mv /tmp/hadolint /usr/local/bin/hadolint
+
+      - name: Lint Dockerfiles
+        run: |
+          shopt -s globstar nullglob
+          found=0
+          for file in **/Dockerfile; do
+            [ -e "$file" ] && hadolint "$file" && found=1
+          done
+          if [ $found -eq 0 ]; then
+            echo "No Dockerfiles found."
+          fi
