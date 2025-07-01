@@ -1,3 +1,106 @@
 # Ignore dataset outputs
 /data/
 __pycache__/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+universal_fungal_intelligence.log
+errors.log
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+fungal_intelligence.db
+
+# Data files
+data/
+*.jsonl
+*.csv
+
+# GCP / Cloud
+gcp-service-key.json
+*.json.key
+.gcloud/
+.gsutil/
+service-account-key.json
+GOOGLE_APPLICATION_CREDENTIALS
+
+# Credentials and secrets
+.env.*
+secrets/
+credentials/
+*.pem
+*.key
+*.cert
+
+# Project specific
+crowechem_dataset.jsonl
+metrics.jsonl
+/logs/
+/tmp/
+/temp/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb

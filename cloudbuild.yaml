@@ -1,30 +1,58 @@
 steps:
+  # Step 1: Create GCS bucket if it doesn't exist
   - name: 'gcr.io/cloud-builders/gsutil'
-    args: ['cp', 'logs/metrics.jsonl', 'gs://your-bucket-name/ml_metrics/metrics.jsonl']
+    args: ['mb', '-p', 'crowechem-fungi', 'gs://crowechem-fungi-ml-metrics']
+    id: 'create-bucket'
+    waitFor: ['-']
 
+  # Step 2: Upload metrics to GCS
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args: ['cp', 'logs/metrics.jsonl', 'gs://crowechem-fungi-ml-metrics/ml_metrics/metrics_${BUILD_ID}.jsonl']
+    id: 'upload-metrics'
+    waitFor: ['create-bucket']
+
+  # Step 3: Create BigQuery dataset
   - name: 'gcr.io/cloud-builders/bq'
     args:
       - 'mk'
       - '--dataset'
+      - '--project=crowechem-fungi'
       - 'crowe_ml_pipeline'
     id: 'create-dataset'
     waitFor: ['-']
 
+  # Step 4: Create BigQuery table
   - name: 'gcr.io/cloud-builders/bq'
     args:
       - 'mk'
       - '--table'
-      - 'crowe_ml_pipeline.metrics_log'
-      - 'dataset:STRING,n_train:INTEGER,n_test:INTEGER,rmse:FLOAT,r2:FLOAT,timestamp:TIMESTAMP'
+      - '--project=crowechem-fungi'
+      - 'crowechem-fungi:crowe_ml_pipeline.metrics_log'
+      - 'dataset:STRING,n_train:INTEGER,n_test:INTEGER,rmse:FLOAT,r2:FLOAT,timestamp:TIMESTAMP,model_type:STRING,compound_analyzed:STRING,bioactivity_score:FLOAT'
     id: 'create-table-if-needed'
     waitFor: ['create-dataset']
 
+  # Step 5: Load metrics into BigQuery
   - name: 'gcr.io/cloud-builders/bq'
     args:
       - 'load'
       - '--source_format=NEWLINE_DELIMITED_JSON'
-      - 'crowe_ml_pipeline.metrics_log'
-      - 'gs://your-bucket-name/ml_metrics/metrics.jsonl'
-    waitFor: ['create-table-if-needed']
+      - '--project=crowechem-fungi'
+      - 'crowechem-fungi:crowe_ml_pipeline.metrics_log'
+      - 'gs://crowechem-fungi-ml-metrics/ml_metrics/metrics_${BUILD_ID}.jsonl'
+    waitFor: ['create-table-if-needed', 'upload-metrics']
 
-timeout: 300s
+  # Step 6: Create fungal analysis results table
+  - name: 'gcr.io/cloud-builders/bq'
+    args:
+      - 'mk'
+      - '--table'
+      - '--project=crowechem-fungi'
+      - 'crowechem-fungi:crowe_ml_pipeline.fungal_analysis_results'
+      - 'analysis_id:STRING,timestamp:TIMESTAMP,species_analyzed:INTEGER,compounds_analyzed:INTEGER,breakthrough_discoveries:INTEGER,therapeutic_candidates:STRING,synthesis_pathways:STRING,impact_assessment:STRING'
+    id: 'create-fungal-table'
+    waitFor: ['create-dataset']
+
+timeout: 600s
+options:
+  logging: CLOUD_LOGGING_ONLY

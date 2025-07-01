@@ -8,6 +8,15 @@ torch
 biopython
 aiohttp
 requests
-logging
 pytest
-```
+sqlalchemy
+joblib
+
+# Google Cloud libraries
+google-cloud-bigquery
+google-cloud-storage
+
+# Web UI and visualization
+streamlit
+plotly
+beautifulsoup4
