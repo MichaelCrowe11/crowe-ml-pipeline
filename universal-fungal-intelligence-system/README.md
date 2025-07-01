@@ -1,6 +1,8 @@
 # 🍄 Universal Fungal Intelligence System
 
-> **Advanced AI-powered platform for discovering breakthrough therapeutics from the fungal kingdom**
+> **Advanced EI-powered platform for discovering breakthrough therapeutics from the fungal kingdom**
+
+**Powered by Crowe Logic™ AI Engine | Part of the Mycelium EI Ecosystem**
 
 This is the core Universal Fungal Intelligence System - a sophisticated bioinformatics platform that analyzes the entire documented fungal kingdom to discover novel therapeutic compounds using machine learning, multi-source data integration, and cloud-scale processing.
 

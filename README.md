@@ -1,11 +1,26 @@
+<div align="center">
+
+![Mycelium EI](https://github.com/user-attachments/assets/mycelium-ei-logo.png)
+
 # 🍄 Universal Fungal Intelligence System
+### Part of the Mycelium EI Ecosystem
+
+![Crowe Logic](https://github.com/user-attachments/assets/crowe-logic-logo.png)
+
+**Powered by Crowe Logic™ AI Engine**
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/your-repo/actions)
 [![Cloud Ready](https://img.shields.io/badge/cloud-GCP%20ready-blue.svg)](https://cloud.google.com/)
+[![Mycelium EI](https://img.shields.io/badge/Platform-Mycelium%20EI-00d4ff.svg)](https://mycelium-ei.com)
+[![Crowe Logic](https://img.shields.io/badge/Engine-Crowe%20Logic™-00ff88.svg)](https://crowe-logic.com)
+
+</div>
 
 > **The world's most comprehensive bioinformatics platform for discovering breakthrough therapeutics from the fungal kingdom**
+
+**🧠 Crowe Logic™** serves as the Ecological Intelligence (EI) engine, processing vast datasets from the crowe-ml-pipeline to power breakthrough discovery through natural pattern recognition, while **🌐 Mycelium EI** provides the scalable platform ecosystem designed to expand into environmental monitoring, agricultural optimization, and other critical sectors.
 
 The Universal Fungal Intelligence System is an advanced AI-powered platform that analyzes the entire documented fungal kingdom to discover novel therapeutic compounds. Using sophisticated machine learning, multi-source data integration, and cloud-scale processing, this system identifies breakthrough molecular modifications with potential for human therapeutics.
 

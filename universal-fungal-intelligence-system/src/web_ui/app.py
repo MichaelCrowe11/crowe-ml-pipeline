@@ -95,7 +95,7 @@ with st.sidebar:
     
     analysis_mode = st.selectbox(
         "Select Analysis Mode",
-        ["Quick Compound Analysis", "Full Fungal Kingdom Scan", "Data Source Explorer", "Training Pipeline"]
+        ["Quick Compound Analysis", "Full Fungal Kingdom Scan", "Data Source Explorer", "Training Pipeline", "3D Molecular Visualization"]
     )
     
     st.markdown("---")
@@ -456,4 +456,4 @@ st.markdown("""
     🍄 Universal Fungal Intelligence System | Powered by AI & Fungal Wisdom | 
     <a href='https://github.com/yourusername/fungal-intelligence'>GitHub</a>
 </div>
-""", unsafe_allow_html=True) 
+""", unsafe_allow_html=True)
