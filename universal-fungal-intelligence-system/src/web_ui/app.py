@@ -33,6 +33,7 @@ from web_ui.components.compound_analysis import *
 from web_ui.components.global_analysis import *
 from web_ui.components.data_explorer import *
 from web_ui.components.integration import integration_manager, render_integration_help
+from web_ui.components.dataset_builder import render_dataset_builder
 
 # Page config
 st.set_page_config(
@@ -110,7 +111,7 @@ with st.sidebar:
     analysis_mode = st.selectbox(
         "Select Analysis Mode",
         ["Quick Compound Analysis", "Full Fungal Kingdom Scan", "Data Source Explorer", 
-         "Training Pipeline", "App Integration", "Integration Help"]
+         "Training Pipeline", "Dataset Builder", "App Integration", "Integration Help"]
     )
     
     st.markdown("---")
@@ -466,6 +467,9 @@ elif analysis_mode == "Training Pipeline":
                 st.plotly_chart(fig, use_container_width=True)
             else:
                 st.bar_chart(df_imp.set_index('Feature')['Importance'])
+
+elif analysis_mode == "Dataset Builder":
+    render_dataset_builder()
 
 elif analysis_mode == "App Integration":
     st.markdown("## 🔧 App Integration")
