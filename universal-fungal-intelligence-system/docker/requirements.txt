@@ -1,13 +1,27 @@
-Flask==2.2.5
-numpy==1.22.0
-pandas==1.3.0
-rdkit==2021.03.1.0
-scikit-learn==1.5.0
-torch==2.7.1
-biopython==1.78
-aiohttp==3.10.11
-requests==2.32.4
-pytest==6.2.4
-pytest-asyncio==0.15.1
-sqlalchemy==1.4.22
-flask-cors==6.0.0
+# Required Python packages for the Universal Fungal Intelligence System
+
+numpy>=1.21.0
+pandas>=1.3.0
+scikit-learn>=1.0.0
+rdkit-pypi>=2022.3.0
+torch>=1.12.0
+biopython>=1.78
+aiohttp>=3.8.0
+requests>=2.25.0
+pytest>=6.2.0
+pytest-asyncio>=0.15.0
+sqlalchemy>=1.4.0
+joblib>=1.0.0
+
+# Google Cloud libraries
+google-cloud-bigquery>=3.0.0
+google-cloud-storage>=2.0.0
+
+# Web UI and visualization
+streamlit>=1.15.0
+plotly>=5.10.0
+beautifulsoup4>=4.10.0
+
+# Chemistry and data processing
+pubchempy>=1.0.4
+asyncio-throttle>=1.0.0

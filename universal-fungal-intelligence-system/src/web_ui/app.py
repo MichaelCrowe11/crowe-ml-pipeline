@@ -1,8 +1,5 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
 import numpy as np
 import asyncio
 import sys
@@ -13,12 +10,29 @@ import json
 # Add parent directory to path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 
+try:
+    import plotly.express as px
+    import plotly.graph_objects as go
+    from plotly.subplots import make_subplots
+    PLOTLY_AVAILABLE = True
+except ImportError:
+    PLOTLY_AVAILABLE = False
+    st.error("Plotly not installed. Please run: pip install plotly")
+
 from core.fungal_intelligence import UniversalFungalIntelligence
 from core.molecular_analyzer import MolecularAnalyzer
 from core.bioactivity_predictor import BioactivityPredictor
 from data.collectors.pubchem_client import PubChemClient
+from data.collectors.mycobank_client import MycoBankClient
+from data.collectors.ncbi_client import NCBIClient
 from database import init_db
 from utils.bigquery_exporter import BigQueryExporter
+
+# Import new modular components
+from web_ui.components.compound_analysis import *
+from web_ui.components.global_analysis import *
+from web_ui.components.data_explorer import *
+from web_ui.components.integration import integration_manager, render_integration_help
 
 # Page config
 st.set_page_config(
@@ -95,7 +109,8 @@ with st.sidebar:
     
     analysis_mode = st.selectbox(
         "Select Analysis Mode",
-        ["Quick Compound Analysis", "Full Fungal Kingdom Scan", "Data Source Explorer", "Training Pipeline", "3D Molecular Visualization"]
+        ["Quick Compound Analysis", "Full Fungal Kingdom Scan", "Data Source Explorer", 
+         "Training Pipeline", "App Integration", "Integration Help"]
     )
     
     st.markdown("---")
@@ -445,9 +460,117 @@ elif analysis_mode == "Training Pipeline":
             df_imp = pd.DataFrame(list(importance.items()), columns=['Feature', 'Importance'])
             df_imp = df_imp.sort_values('Importance', ascending=True)
             
-            fig = px.bar(df_imp, x='Importance', y='Feature', orientation='h',
-                        color='Importance', color_continuous_scale='viridis')
-            st.plotly_chart(fig, use_container_width=True)
+            if PLOTLY_AVAILABLE:
+                fig = px.bar(df_imp, x='Importance', y='Feature', orientation='h',
+                            color='Importance', color_continuous_scale='viridis')
+                st.plotly_chart(fig, use_container_width=True)
+            else:
+                st.bar_chart(df_imp.set_index('Feature')['Importance'])
+
+elif analysis_mode == "App Integration":
+    st.markdown("## 🔧 App Integration")
+    
+    # Show available integration modules
+    selected_module = integration_manager.render_module_selector()
+    
+    if selected_module:
+        st.markdown("---")
+        integration_manager.render_module_interface(selected_module)
+    else:
+        st.info("Select an integration module to get started.")
+    
+    # Option to add custom integration
+    with st.expander("➕ Add Custom Integration"):
+        st.markdown("### Custom Integration Options")
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.markdown("#### GitHub Repository Integration")
+            github_url = st.text_input("GitHub Repository URL", 
+                                     placeholder="https://github.com/username/repository")
+            if st.button("🔗 Integrate GitHub App"):
+                if github_url:
+                    st.info(f"Integration with {github_url} would be set up here.")
+                    st.markdown("""
+                    **Next Steps:**
+                    1. Clone the repository
+                    2. Analyze the code structure
+                    3. Create integration module
+                    4. Register with the system
+                    """)
+        
+        with col2:
+            st.markdown("#### Local App Integration")
+            app_path = st.text_input("Local App Path", 
+                                    placeholder="/path/to/your/app")
+            if st.button("📁 Integrate Local App"):
+                if app_path:
+                    st.info(f"Integration with {app_path} would be set up here.")
+
+elif analysis_mode == "Integration Help":
+    render_integration_help()
+    
+    # Show your current app structure for integration guidance
+    st.markdown("## 🏗️ Your Current App Structure")
+    
+    if st.button("📋 Show Integration Template"):
+        st.markdown("### Integration Template for Your App")
+        st.code("""
+class YourAppIntegration(IntegrationModule):
+    def get_name(self) -> str:
+        return "Your App Name"
+    
+    def get_description(self) -> str:
+        return "Description of what your app does"
+    
+    def get_icon(self) -> str:
+        return "🎯"  # Choose an emoji
+    
+    def get_dependencies(self) -> List[str]:
+        return ["package1", "package2"]  # Your app's dependencies
+    
+    def render_interface(self) -> None:
+        st.markdown("## Your App Interface")
+        
+        # Your app's Streamlit code here
+        # Example:
+        user_input = st.text_input("Your Input")
+        if st.button("Process"):
+            # Your app's processing logic
+            result = your_processing_function(user_input)
+            st.success(f"Result: {result}")
+    
+    def your_processing_function(self, input_data):
+        # Your app's core functionality
+        return f"Processed: {input_data}"
+
+# Register your integration
+integration_manager.register_module(YourAppIntegration())
+        """, language='python')
+        
+    st.markdown("### 🤝 Collaboration Features")
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.markdown("""
+        #### What We Can Integrate:
+        - **Data Analysis Apps**: Combine your analysis with fungal intelligence
+        - **Visualization Tools**: Use your charts with our data
+        - **ML Models**: Ensemble your models with ours
+        - **API Services**: Connect external data sources
+        - **Processing Pipelines**: Integrate your workflows
+        """)
+    
+    with col2:
+        st.markdown("""
+        #### Integration Benefits:
+        - **Modular Design**: Easy to add/remove features
+        - **Shared Data**: Access to fungal intelligence data
+        - **Cross-Validation**: Validate results across systems
+        - **Enhanced UI**: Professional Streamlit interface
+        - **Cloud Ready**: Deploy integrated system to cloud
+        """)
 
 # Footer
 st.markdown("---")
