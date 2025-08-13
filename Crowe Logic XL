@@ -3,21 +3,21 @@
   {
    "cell_type": "code",
    "execution_count": 1,
-   "id": "f599d614",
+   "id": "6b2fc028",
    "metadata": {
     "_cell_guid": "b1076dfc-b9ad-4769-8c92-a6c4dae69d19",
     "_uuid": "8f2839f25d086af736a60e9eeb907d3b93b6e0e5",
     "execution": {
-     "iopub.execute_input": "2025-08-13T08:32:21.936459Z",
-     "iopub.status.busy": "2025-08-13T08:32:21.936131Z",
-     "iopub.status.idle": "2025-08-13T08:32:23.726252Z",
-     "shell.execute_reply": "2025-08-13T08:32:23.725166Z"
+     "iopub.execute_input": "2025-08-13T08:33:26.386454Z",
+     "iopub.status.busy": "2025-08-13T08:33:26.386127Z",
+     "iopub.status.idle": "2025-08-13T08:33:28.503964Z",
+     "shell.execute_reply": "2025-08-13T08:33:28.502832Z"
     },
     "papermill": {
-     "duration": 1.79491,
-     "end_time": "2025-08-13T08:32:23.727961",
+     "duration": 2.122991,
+     "end_time": "2025-08-13T08:33:28.505951",
      "exception": false,
-     "start_time": "2025-08-13T08:32:21.933051",
+     "start_time": "2025-08-13T08:33:26.382960",
      "status": "completed"
     },
     "tags": []
@@ -27,6 +27,12 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
+      "/kaggle/input/scicode/test_data.h5\n",
+      "/kaggle/input/scicode/problems_test.jsonl\n",
+      "/kaggle/input/scicode/problems_test.csv\n",
+      "/kaggle/input/scicode/README.md\n",
+      "/kaggle/input/scicode/problems_dev.csv\n",
+      "/kaggle/input/scicode/problems_dev.jsonl\n",
       "/kaggle/input/t5gemma/transformers/t5gemma-xl-xl-ul2-it/1/model.safetensors.index.json\n",
       "/kaggle/input/t5gemma/transformers/t5gemma-xl-xl-ul2-it/1/config.json\n",
       "/kaggle/input/t5gemma/transformers/t5gemma-xl-xl-ul2-it/1/model-00001-of-00002.safetensors\n",
@@ -36,7 +42,10 @@
       "/kaggle/input/t5gemma/transformers/t5gemma-xl-xl-ul2-it/1/chat_template.jinja\n",
       "/kaggle/input/t5gemma/transformers/t5gemma-xl-xl-ul2-it/1/special_tokens_map.json\n",
       "/kaggle/input/t5gemma/transformers/t5gemma-xl-xl-ul2-it/1/tokenizer.model\n",
-      "/kaggle/input/t5gemma/transformers/t5gemma-xl-xl-ul2-it/1/generation_config.json\n"
+      "/kaggle/input/t5gemma/transformers/t5gemma-xl-xl-ul2-it/1/generation_config.json\n",
+      "/kaggle/input/arxiv/arxiv-metadata-oai-snapshot.json\n",
+      "/kaggle/input/mushroom-classification/mushrooms.csv\n",
+      "/kaggle/input/gene-expression-analysis-and-disease-relationship/Gene Expression Analysis and Disease Relationship.csv\n"
      ]
     }
    ],
@@ -65,6 +74,26 @@
   "kaggle": {
    "accelerator": "none",
    "dataSources": [
+    {
+     "datasetId": 478,
+     "sourceId": 974,
+     "sourceType": "datasetVersion"
+    },
+    {
+     "datasetId": 8006559,
+     "sourceId": 12669787,
+     "sourceType": "datasetVersion"
+    },
+    {
+     "datasetId": 612177,
+     "sourceId": 12721734,
+     "sourceType": "datasetVersion"
+    },
+    {
+     "datasetId": 6983063,
+     "sourceId": 11187187,
+     "sourceType": "datasetVersion"
+    },
     {
      "modelId": 378977,
      "modelInstanceId": 359471,
@@ -97,14 +126,14 @@
   },
   "papermill": {
    "default_parameters": {},
-   "duration": 6.981821,
-   "end_time": "2025-08-13T08:32:24.249327",
+   "duration": 7.793665,
+   "end_time": "2025-08-13T08:33:29.027431",
    "environment_variables": {},
    "exception": null,
    "input_path": "__notebook__.ipynb",
    "output_path": "__notebook__.ipynb",
    "parameters": {},
-   "start_time": "2025-08-13T08:32:17.267506",
+   "start_time": "2025-08-13T08:33:21.233766",
    "version": "2.6.0"
   }
  },
