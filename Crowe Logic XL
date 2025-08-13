@@ -3,21 +3,21 @@
   {
    "cell_type": "code",
    "execution_count": 1,
-   "id": "6b2fc028",
+   "id": "4873d597",
    "metadata": {
     "_cell_guid": "b1076dfc-b9ad-4769-8c92-a6c4dae69d19",
     "_uuid": "8f2839f25d086af736a60e9eeb907d3b93b6e0e5",
     "execution": {
-     "iopub.execute_input": "2025-08-13T08:33:26.386454Z",
-     "iopub.status.busy": "2025-08-13T08:33:26.386127Z",
-     "iopub.status.idle": "2025-08-13T08:33:28.503964Z",
-     "shell.execute_reply": "2025-08-13T08:33:28.502832Z"
+     "iopub.execute_input": "2025-08-13T08:35:57.854363Z",
+     "iopub.status.busy": "2025-08-13T08:35:57.854050Z",
+     "iopub.status.idle": "2025-08-13T08:35:59.754075Z",
+     "shell.execute_reply": "2025-08-13T08:35:59.753159Z"
     },
     "papermill": {
-     "duration": 2.122991,
-     "end_time": "2025-08-13T08:33:28.505951",
+     "duration": 1.90492,
+     "end_time": "2025-08-13T08:35:59.755801",
      "exception": false,
-     "start_time": "2025-08-13T08:33:26.382960",
+     "start_time": "2025-08-13T08:35:57.850881",
      "status": "completed"
     },
     "tags": []
@@ -43,9 +43,10 @@
       "/kaggle/input/t5gemma/transformers/t5gemma-xl-xl-ul2-it/1/special_tokens_map.json\n",
       "/kaggle/input/t5gemma/transformers/t5gemma-xl-xl-ul2-it/1/tokenizer.model\n",
       "/kaggle/input/t5gemma/transformers/t5gemma-xl-xl-ul2-it/1/generation_config.json\n",
-      "/kaggle/input/arxiv/arxiv-metadata-oai-snapshot.json\n",
       "/kaggle/input/mushroom-classification/mushrooms.csv\n",
-      "/kaggle/input/gene-expression-analysis-and-disease-relationship/Gene Expression Analysis and Disease Relationship.csv\n"
+      "/kaggle/input/bigquery-ai-hackathon/README\n",
+      "/kaggle/input/gene-expression-analysis-and-disease-relationship/Gene Expression Analysis and Disease Relationship.csv\n",
+      "/kaggle/input/arxiv/arxiv-metadata-oai-snapshot.json\n"
      ]
     }
    ],
@@ -75,8 +76,18 @@
    "accelerator": "none",
    "dataSources": [
     {
+     "databundleVersionId": 13238728,
+     "sourceId": 110281,
+     "sourceType": "competition"
+    },
+    {
      "datasetId": 478,
      "sourceId": 974,
+     "sourceType": "datasetVersion"
+    },
+    {
+     "datasetId": 6983063,
+     "sourceId": 11187187,
      "sourceType": "datasetVersion"
     },
     {
@@ -87,11 +98,6 @@
     {
      "datasetId": 612177,
      "sourceId": 12721734,
-     "sourceType": "datasetVersion"
-    },
-    {
-     "datasetId": 6983063,
-     "sourceId": 11187187,
      "sourceType": "datasetVersion"
     },
     {
@@ -126,14 +132,14 @@
   },
   "papermill": {
    "default_parameters": {},
-   "duration": 7.793665,
-   "end_time": "2025-08-13T08:33:29.027431",
+   "duration": 7.389953,
+   "end_time": "2025-08-13T08:36:00.276873",
    "environment_variables": {},
    "exception": null,
    "input_path": "__notebook__.ipynb",
    "output_path": "__notebook__.ipynb",
    "parameters": {},
-   "start_time": "2025-08-13T08:33:21.233766",
+   "start_time": "2025-08-13T08:35:52.886920",
    "version": "2.6.0"
   }
  },
