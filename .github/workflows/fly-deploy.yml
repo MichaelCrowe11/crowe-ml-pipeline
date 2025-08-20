@@ -64,11 +64,10 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: crowe-vision-platform/package-lock.json
       
       - name: Install dependencies
         working-directory: ./crowe-vision-platform
-        run: npm ci
+        run: npm install --no-audit --no-fund
       
       - name: Build Vision Platform
         working-directory: ./crowe-vision-platform
