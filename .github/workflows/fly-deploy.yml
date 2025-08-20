@@ -21,9 +21,8 @@ jobs:
         with:
           python-version: '3.10'
       
-      - name: Install dependencies
+      - name: Install test tooling
         run: |
-          pip install -r requirements.txt
           pip install pytest pytest-cov
       
       - name: Install UFI dependencies
@@ -35,11 +34,7 @@ jobs:
           cd universal-fungal-intelligence-system
           python -m pytest tests/ -v --cov=src
       
-      - name: Upload coverage reports
-        uses: codecov/codecov-action@v3
-        with:
-          file: ./coverage.xml
-          flags: unittests
+      # Skipping coverage upload to simplify CI for deployment-only runs
 
   deploy-ml-pipeline:
     needs: test
