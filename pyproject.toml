@@ -1,0 +1,108 @@
+[tool.poetry]
+name = "crowe-ml-pipeline"
+version = "2.0.0"
+description = "Advanced ML Pipeline for Compound Discovery with AI-Powered Development"
+authors = ["Crowe Logic Team"]
+license = "MIT"
+readme = "README.md"
+packages = [
+    { include = "universal_fungal_intelligence_system", from = "." },
+    { include = "crios", from = "." },
+    { include = "ml_enhancements", from = "." }
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+# Core Scientific Computing
+numpy = "^1.24.0"
+pandas = "^2.0.0"
+scipy = "^1.10.0"
+
+# Machine Learning
+scikit-learn = "^1.3.0"
+xgboost = "^1.7.0"
+torch = "^2.0.0"
+transformers = "^4.30.0"
+
+# Chemistry and Molecular Analysis
+rdkit-pypi = "^2023.3.0"
+pubchempy = "^1.0.4"
+
+# Web Framework
+fastapi = "^0.100.0"
+uvicorn = "^0.23.0"
+streamlit = "^1.25.0"
+
+# Visualization
+plotly = "^5.15.0"
+matplotlib = "^3.7.0"
+seaborn = "^0.12.0"
+
+# Cloud Integration
+google-cloud-bigquery = "^3.11.0"
+google-cloud-storage = "^2.10.0"
+
+# Async and Networking
+aiohttp = "^3.8.0"
+asyncio = "^3.4.3"
+requests = "^2.31.0"
+httpx = "^0.24.0"
+
+# Database
+sqlalchemy = "^2.0.0"
+alembic = "^1.11.0"
+psycopg2-binary = "^2.9.0"
+
+# CLI and Interface
+rich = "^13.5.0"
+typer = "^0.9.0"
+click = "^8.1.0"
+prompt-toolkit = "^3.0.0"
+
+# Development Tools
+pytest = "^7.4.0"
+pytest-asyncio = "^0.21.0"
+pytest-cov = "^4.1.0"
+black = "^23.7.0"
+flake8 = "^6.1.0"
+mypy = "^1.5.0"
+
+# Utilities
+python-dotenv = "^1.0.0"
+pydantic = "^2.0.0"
+joblib = "^1.3.0"
+tqdm = "^4.65.0"
+networkx = "^3.1.0"
+
+[tool.poetry.group.dev.dependencies]
+ipython = "^8.14.0"
+jupyter = "^1.0.0"
+jupyterlab = "^4.0.0"
+notebook = "^7.0.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 100
+target-version = ['py310']
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "universal-fungal-intelligence-system/tests"]
+python_files = ["test_*.py", "*_test.py"]
+addopts = "-v --cov=src --cov-report=term-missing"
+

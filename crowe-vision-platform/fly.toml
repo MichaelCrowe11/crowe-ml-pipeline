@@ -1,0 +1,52 @@
+# Fly.io configuration for Crowe Vision Platform
+# Next-generation UI with 3D visualizations
+
+app = "crowe-vision"
+primary_region = "sjc"
+kill_signal = "SIGINT"
+kill_timeout = "5s"
+
+[build]
+  [build.args]
+    NEXT_PUBLIC_API_URL = "https://crowe-ml-pipeline.fly.dev"
+    NEXT_PUBLIC_WS_URL = "wss://crowe-ml-pipeline.fly.dev"
+
+[env]
+  PORT = "3000"
+  NODE_ENV = "production"
+  NEXT_PUBLIC_API_URL = "https://crowe-ml-pipeline.fly.dev"
+
+[experimental]
+  auto_rollback = true
+
+[[services]]
+  protocol = "tcp"
+  internal_port = 3000
+  processes = ["app"]
+
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+    force_https = true
+
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
+  
+  [services.concurrency]
+    type = "connections"
+    hard_limit = 100
+    soft_limit = 80
+
+  [[services.http_checks]]
+    interval = "10s"
+    timeout = "2s"
+    grace_period = "5s"
+    restart_limit = 0
+    path = "/"
+    method = "get"
+
+[mounts]
+  source = "vision_cache"
+  destination = "/app/.next/cache"
+  initial_size = "1gb"

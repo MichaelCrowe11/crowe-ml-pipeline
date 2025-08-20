@@ -1,0 +1,66 @@
+# Main Fly.io configuration for Crowe ML Pipeline
+# This deploys the core Universal Fungal Intelligence System
+
+app = "crowe-ml-pipeline"
+primary_region = "sjc"
+kill_signal = "SIGINT"
+kill_timeout = "5s"
+
+[build]
+  dockerfile = "Dockerfile.fly"
+
+[env]
+  PORT = "8080"
+  PYTHON_VERSION = "3.10"
+  PROJECT_ID = "crowe-ml-pipeline"
+  ENVIRONMENT = "production"
+  
+[experimental]
+  auto_rollback = true
+
+[[services]]
+  protocol = "tcp"
+  internal_port = 8080
+  processes = ["app"]
+
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+    force_https = true
+
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
+  
+  [services.concurrency]
+    type = "connections"
+    hard_limit = 25
+    soft_limit = 20
+
+  [[services.tcp_checks]]
+    interval = "15s"
+    timeout = "2s"
+    grace_period = "1s"
+    restart_limit = 0
+
+  [[services.http_checks]]
+    interval = "10s"
+    timeout = "2s"
+    grace_period = "5s"
+    restart_limit = 0
+    path = "/health"
+    method = "get"
+    tls_skip_verify = false
+
+[[statics]]
+  guest_path = "/app/static"
+  url_prefix = "/static/"
+
+[mounts]
+  source = "crowe_data"
+  destination = "/data"
+  initial_size = "10gb"
+
+[metrics]
+  port = 9091
+  path = "/metrics"
