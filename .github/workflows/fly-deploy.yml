@@ -44,6 +44,11 @@ jobs:
       
       - uses: superfly/flyctl-actions/setup-flyctl@master
       
+      - name: Ensure ML app and volume exist
+        run: |
+          flyctl apps create crowe-ml-pipeline || true
+          flyctl volumes create crowe_data --size 10 --region sjc --app crowe-ml-pipeline || true
+      
       - name: Build and deploy ML Pipeline
         run: |
           flyctl deploy --remote-only --config fly.toml --app crowe-ml-pipeline
@@ -76,6 +81,12 @@ jobs:
           NEXT_PUBLIC_API_URL: https://crowe-ml-pipeline.fly.dev
       
       - uses: superfly/flyctl-actions/setup-flyctl@master
+      
+      - name: Ensure Vision app and volume exist
+        working-directory: ./crowe-vision-platform
+        run: |
+          flyctl apps create crowe-vision || true
+          flyctl volumes create vision_cache --size 1 --region sjc --app crowe-vision || true
       
       - name: Deploy Vision Platform
         working-directory: ./crowe-vision-platform
