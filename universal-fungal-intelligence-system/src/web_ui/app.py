@@ -7,8 +7,10 @@ import os
 from datetime import datetime
 import json
 
-# Add parent directory to path
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+# Ensure the top-level "src" directory is on the Python path so we can import core/* modules.
+SRC_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
+if SRC_DIR not in sys.path:
+    sys.path.insert(0, SRC_DIR)
 
 try:
     import plotly.express as px
@@ -268,7 +270,7 @@ elif analysis_mode == "Full Fungal Kingdom Scan":
                 fungal_system = UniversalFungalIntelligence()
                 
                 # Run analysis
-                results = asyncio.run(fungal_system.analyze_global_fungal_kingdom())
+                results = fungal_system.analyze_global_fungal_kingdom()
                 st.session_state.analysis_results = results
                 
                 # Export to BigQuery if enabled

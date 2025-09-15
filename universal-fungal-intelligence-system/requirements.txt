@@ -1,8 +1,8 @@
 # Required Python packages for the Universal Fungal Intelligence System
 
-numpy
+numpy<2.0,>=1.24.0
 pandas
-rdkit
+rdkit-pypi>=2022.3.0
 scikit-learn
 torch
 biopython

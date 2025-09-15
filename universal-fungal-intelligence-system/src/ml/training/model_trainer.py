@@ -13,10 +13,10 @@ import json
 from datetime import datetime
 
 # Import data collectors
-from ...data.collectors.pubchem_client import PubChemClient
-from ...data.collectors.mycobank_client import MycoBankClient
-from ...data.collectors.ncbi_client import NCBIClient
-from ...core.molecular_analyzer import MolecularAnalyzer
+from data.collectors.pubchem_client import PubChemClient
+from data.collectors.mycobank_client import MycoBankClient
+from data.collectors.ncbi_client import NCBIClient
+from core.molecular_analyzer import MolecularAnalyzer
 
 logger = logging.getLogger(__name__)
 
